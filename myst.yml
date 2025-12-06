@@ -1,0 +1,39 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 12761b47-6d07-47ba-9170-05c00243f004
+  title: "Prédictions conformes"
+  # description:
+  keywords: ["machine learning", "conformal predictions", "classification", "regression"]
+  github: "https://github.com/mathisdrn/conformal-prediction"
+  date: 2025-12-05
+  license:
+    content: CC-BY-SA-4.0
+    code: MIT
+  authors: 
+    - name: Mathis Derenne
+      affiliation: M2 MIASHS - Université de Lyon
+      github: mathisdrn
+  requirements: 
+    - pyproject.toml
+    
+    
+  toc:
+    - file: src/index.md
+    - title: Régression
+      children:
+        - file: src/regression/0-eda.ipynb
+        - file: src/regression/1-scp.ipynb
+        - file: src/regression/2-cqr.ipynb
+        - file: src/regression/3-cv+.ipynb
+    - title: Classification
+      children:
+        - file: src/classification/0-eda.ipynb
+        - file: src/classification/1-scp.ipynb
+        - file: src/classification/2-aps.ipynb
+    
+site:
+  template: book-theme
+  options:
+    logo_text: "Prédictions conformes – M2 MIASHS – Université de Lyon"
+    hide_search: false
