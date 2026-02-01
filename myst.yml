@@ -31,6 +31,10 @@ project:
         - file: src/classification/0-eda.ipynb
         - file: src/classification/1-scp.ipynb
         - file: src/classification/2-aps.ipynb
+    - title: Analyse de survie
+      children:
+        - file: src/survival/0-introduction.ipynb
+        - file: src/survival/1-implementation.ipynb
     
 site:
   template: book-theme
