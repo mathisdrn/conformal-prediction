@@ -34,7 +34,14 @@ project:
     - title: Analyse de survie
       children:
         - file: src/survival/0-introduction.ipynb
-        - file: src/survival/1-implementation.ipynb
+        - file: src/survival/1-eda.ipynb
+        - file: src/survival/2-cox.ipynb
+        - file: src/survival/3-random-survival-forest.ipynb
+        - file: src/survival/4-gboost-survival.ipynb
+        - file: src/survival/5-survival-svm.ipynb
+        - file: src/survival/6-xgboost-aft.ipynb
+        - file: src/survival/7-results.ipynb
+        - file: src/survival/8-conformal-prediction.ipynb
     
 site:
   template: book-theme
