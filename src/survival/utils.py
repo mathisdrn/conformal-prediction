@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import polars as pl
+import polars.selectors as cs
 from sksurv.metrics import (
     brier_score,
     concordance_index_censored,
@@ -84,4 +85,4 @@ def evaluate_survival_model(
         _, brier_med = brier_score(y_train, y_test, s_at_t_med, t_med)
         metrics[f"Brier (t={t_med})"] = brier_med[0]
 
-    return pl.DataFrame(metrics)
+    return pl.DataFrame(metrics).with_columns(cs.numeric().round(2))
