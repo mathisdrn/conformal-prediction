@@ -6,4 +6,4 @@ Dans de nombreux domaines critiques, obtenir une simple prédiction de la part d
 
 Ce projet explore et met en œuvre des méthodes de **quantification d'incertitude**, notamment la **régression quantile** et la **prédiction conforme**. L'objectif est de passer d'une prédiction ponctuelle (souvent faillible) à des intervalles ou des ensembles de prédiction offrant des garanties statistiques fortes.
 
-Ce projet contient l'implémentation, la comparaison et l'évaluation de ces méthodes dans le cadre de la **régression** et de la **classification multi-classe**.
+Ce projet contient l'implémentation, la comparaison et l'évaluation de ces méthodes dans le cadre de la **régression**, de la **classification multi-classe** et de **la survie avec données censurées**.
