@@ -32,16 +32,19 @@ dev = ["jupytext>=1.19.1", "ruff>=0.15.0"]
 notebook_metadata_filter = "jupytext,kernelspec"
 cell_metadata_filter = "-all"
 
-[tool.jupytext.formats]
-"notebooks/" = "ipynb"
-"src/" = "py:percent"
-# "src/[0-9]*.py" = "py:percent" # Ne synchronise que les fichiers commençant par un chiffre
+# [tool.jupytext.formats]
+# "notebooks/" = "ipynb"
+# "src/" = "py:percent"
+# # "src/[0-9]*.py" = "py:percent" # Ne synchronise que les fichiers commençant par un chiffre
 
 [tool.ruff]
 fix = true
 
 [tool.ruff.lint.pylint]
 max-args = 8
+
+[tool.ruff.lint.pydocstyle]
+convention = "google" # Accepts: "google", "numpy", or "pep257".
 
 [tool.ruff.lint.pycodestyle]
 max-line-length = 320
@@ -72,4 +75,5 @@ ignore = [
     "RET504",  # return-statement
     "SIM108",  # ternary operator should be used 
     "INP001",  # implicit-namespace-package
+    "PGH003",  # blanket-type-ignore
 ]

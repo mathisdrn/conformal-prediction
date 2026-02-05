@@ -1,6 +1,5 @@
 """Metrics to evaluate performance of regression models."""
 
-from collections.abc import Sequence
 from typing import Literal
 
 import altair as alt
@@ -58,29 +57,19 @@ alt.data_transformers.enable("vegafusion")
 
 def plot_correlation(
     data: pd.DataFrame | pl.DataFrame,
-    corr_types: Sequence[Literal["pearson", "spearman"]],
+    corr_types: list[Literal["pearson", "kendall", "spearman"]],
     mark: Literal["circle", "square", "tick", "point"] = "circle",
 ) -> alt.ConcatChart:
     """Plot the pairwise correlations between columns.
 
-    Parameters
-    ----------
-    data : DataFrame
-        pandas or polars DataFrame with input data.
-    corr_types: list of (str or function)
-        Which correlations to calculate.
-        Anything that is accepted by DataFrame.corr.
-    mark: str
-        Shape of the points. Passed to Chart.
-        One of "circle", "square", "tick", or "point".
+    Args:
+        data (pd.DataFrame | pl.DataFrame): The input data.
+        corr_types (list[Literal["pearson", "kendall", "spearman"]]): The types of correlations to compute and plot.
+        mark (Literal["circle", "square", "tick", "point"], optional): The mark type to use for the correlation plot, by default "circle".
 
-    Returns
-    -------
-    ConcatChart
-        Concatenated Chart of the correlation plots laid out in a single row.
-
+    Returns:
+        alt.ConcatChart: An Altair chart showing the pairwise correlations between columns for each specified correlation type.
     """
-
     # Convert Polars to pandas if needed
     if isinstance(data, pl.DataFrame):
         data = data.to_pandas()
@@ -88,7 +77,7 @@ def plot_correlation(
     subplot_row = []
     for num, corr_type in enumerate(corr_types):
         yaxis = alt.Axis() if num == 0 else alt.Axis(labels=False)
-        corr_df = data.select_dtypes(["number", "boolean"]).corr(corr_type)
+        corr_df = data.select_dtypes(["number", "boolean"]).corr(corr_type)  # type: ignore
         mask = np.zeros_like(corr_df, dtype=bool)
         mask[np.triu_indices_from(mask)] = True
         corr_df[mask] = np.nan
