@@ -24,3 +24,26 @@ dependencies = [
     "vl-convert-python>=1.8.0",
     "xgboost>=3.1.3",
 ]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",  # missing-trailing-comma (Handled by the formatter)
+    "C408",    # unnecessary-collection-call 
+    "D213",    # multi-line-summary-second-line
+    "D203",    # blank-line-before-class
+    "C420",    # unnecessary-dict-comprehension-for-iterable
+    "PLR2004", # magic-value-comparison
+    "T201",    # print-statement
+    "D202",    # blank-line-before-function
+    "N816",    # mixed-case-variable-in-global-scope
+    "RUF001",  # ambiguous-unicode-character-string
+    "RUF002",  # ambiguous-unicode-character-docstring
+    "RUF003",  # ambiguous-unicode-character-comment
+    "ERA001",  # commented-out-code
+    "S113",    # requests call without timeout
+    "D401",    # docstring should be in imperative mood
+]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120

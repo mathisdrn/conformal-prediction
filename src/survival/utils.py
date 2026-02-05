@@ -17,8 +17,8 @@ def get_survival_at_t(surv_fns, t):
         return np.array(
             [np.interp(t, surv_fns.index, surv_fns[col]) for col in surv_fns.columns]
         )
-    else:  # sksurv (StepFunction objects)
-        return np.array([fn(t) for fn in surv_fns])
+    # sksurv (StepFunction objects)
+    return np.array([fn(t) for fn in surv_fns])
 
 
 def evaluate_survival_model(

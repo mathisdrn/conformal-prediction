@@ -1,3 +1,8 @@
+"""Metrics to evaluate performance of regression models."""
+
+from collections.abc import Sequence
+from typing import Literal
+
 import altair as alt
 import numpy as np
 import pandas as pd
@@ -52,10 +57,11 @@ alt.data_transformers.enable("vegafusion")
 
 
 def plot_correlation(
-    data: pd.DataFrame | pl.DataFrame, corr_types=["pearson", "spearman"], mark="circle"
-):
-    """
-    Plot the pairwise correlations between columns.
+    data: pd.DataFrame | pl.DataFrame,
+    corr_types: Sequence[Literal["pearson", "spearman"]],
+    mark: Literal["circle", "square", "tick", "point"] = "circle",
+) -> alt.ConcatChart:
+    """Plot the pairwise correlations between columns.
 
     Parameters
     ----------
@@ -72,6 +78,7 @@ def plot_correlation(
     -------
     ConcatChart
         Concatenated Chart of the correlation plots laid out in a single row.
+
     """
 
     # Convert Polars to pandas if needed
@@ -80,10 +87,7 @@ def plot_correlation(
 
     subplot_row = []
     for num, corr_type in enumerate(corr_types):
-        if num > 0:
-            yaxis = alt.Axis(labels=False)
-        else:
-            yaxis = alt.Axis()
+        yaxis = alt.Axis() if num == 0 else alt.Axis(labels=False)
         corr_df = data.select_dtypes(["number", "boolean"]).corr(corr_type)
         mask = np.zeros_like(corr_df, dtype=bool)
         mask[np.triu_indices_from(mask)] = True
@@ -99,7 +103,7 @@ def plot_correlation(
         ind_sort = corr2["index"].value_counts().index.tolist()
 
         subplot_row.append(
-            alt.Chart(corr2, mark=mark, title=f"{corr_type.capitalize()} correlations")  # type: ignore
+            alt.Chart(corr2, mark=mark, title=f"{corr_type.capitalize()} correlations")
             .transform_calculate(abs_value="abs(datum.value)")
             .encode(
                 alt.X("index", sort=ind_sort, title=""),
