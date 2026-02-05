@@ -25,25 +25,51 @@ dependencies = [
     "xgboost>=3.1.3",
 ]
 
+[dependency-groups]
+dev = ["jupytext>=1.19.1", "ruff>=0.15.0"]
+
+[tool.jupytext]
+notebook_metadata_filter = "jupytext,kernelspec"
+cell_metadata_filter = "-all"
+
+[tool.jupytext.formats]
+"notebooks/" = "ipynb"
+"src/" = "py:percent"
+# "src/[0-9]*.py" = "py:percent" # Ne synchronise que les fichiers commençant par un chiffre
+
+[tool.ruff]
+fix = true
+
+[tool.ruff.lint.pylint]
+max-args = 8
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 320
+
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "COM812",  # missing-trailing-comma (Handled by the formatter)
+    "ANN204",  # missing class init return type
+    "COM812",  # missing-trailing-comma, is already handled by ruff formatting
     "C408",    # unnecessary-collection-call 
-    "D213",    # multi-line-summary-second-line
+    "C420",    # unnecessary-dict-comprehension
+    "D1",      # docstring-missing 
+    "D202",    # blank-line-before-function
     "D203",    # blank-line-before-class
-    "C420",    # unnecessary-dict-comprehension-for-iterable
+    "D213",    # multi-line-summary-second-line
+    "D401",    # docstring should be in imperative mood
+    "E402",    # module level import not at top of file
+    "ERA001",  # Allow commented out code 
+    "N803",    # Allow non-lowercase argument names (e.g., fit(X, y))
+    "N806",    # Allow non-lowercase variables in functions (e.g., Matrix X)
+    "N816",    # mixed-case-variable-in-global-scope
     "PLR2004", # magic-value-comparison
     "T201",    # print-statement
-    "D202",    # blank-line-before-function
-    "N816",    # mixed-case-variable-in-global-scope
+    "S113",    # requests call without timeout
     "RUF001",  # ambiguous-unicode-character-string
     "RUF002",  # ambiguous-unicode-character-docstring
     "RUF003",  # ambiguous-unicode-character-comment
-    "ERA001",  # commented-out-code
-    "S113",    # requests call without timeout
-    "D401",    # docstring should be in imperative mood
+    "RET504",  # return-statement
+    "SIM108",  # ternary operator should be used 
+    "INP001",  # implicit-namespace-package
 ]
-
-[tool.ruff.lint.pycodestyle]
-max-line-length = 120
